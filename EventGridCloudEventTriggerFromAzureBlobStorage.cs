@@ -1,13 +1,11 @@
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using Azure.Messaging;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.EventGrid;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace DU.BlobCreated
 {
@@ -39,13 +37,13 @@ namespace DU.BlobCreated
             var azureBlobCloudEventData = System.Text.Json.JsonSerializer.Deserialize<AzureBlobCloudEventData>(cloudEvent.Data.ToString());
             log.LogInformation("URL deserialized {url}", azureBlobCloudEventData.url);
 
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.Add("url", azureBlobCloudEventData.url);
-            var content = new StringContent(jsonObject.ToJsonString(), Encoding.UTF8, "application/json");
+            JsonObject postRequestJsonObject = new JsonObject();
+            postRequestJsonObject.Add("url", azureBlobCloudEventData.url);
+            var postRequestJsonContent = new StringContent(postRequestJsonObject.ToJsonString(), Encoding.UTF8, "application/json");
 
             var logicAppHttpRequestListenerUrl = "copy-past-url-from-logic-app-http-request-listener";
             var httpClient = new HttpClient();
-            var response = await httpClient.PostAsync(logicAppHttpRequestListenerUrl, content);
+            var response = await httpClient.PostAsync(logicAppHttpRequestListenerUrl, postRequestJsonContent);
             var responseString = await response.Content.ReadAsStringAsync();
 
             log.LogInformation("Response received {response}", responseString);
