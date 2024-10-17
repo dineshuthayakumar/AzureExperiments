@@ -7,6 +7,7 @@ A repository to document my experiments with Microsoft Azure
  Name:Inbox/2024-07.csv  
  Size: 16969 Bytes  
 2024-10-17T11:19:22Z   [Information]   Executed 'BlobTriggerForThirdParties' (Succeeded, Id=2739050f-04aa-400a-87c2-a42b6a0051ae, Duration=17ms)  
+  
 **Azure Function**  
 2024-10-17T11:19:22Z   [Information]   Executing 'EventGridCloudEventTriggerFromAzureBlobStorage' (Reason='EventGrid trigger fired at 2024-10-17T11:19:22.2840439+00:00', Id=9e460285-53bb-401a-bcf9-564f06b7fede)  
 2024-10-17T11:19:22Z   [Information]   URL deserialized https://dineshuthayakumar.blob.core.windows.net/thirdparties/Inbox/2024-07.csv  
